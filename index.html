@@ -247,6 +247,159 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/10/Markdown-Basics  (快速入门)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张永帅">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="流光">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/10/Markdown-Basics  (快速入门)/" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T18:13:53+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Markdown-Basics-快速入门"><a href="#Markdown-Basics-快速入门" class="headerlink" title="Markdown:Basics  (快速入门)"></a>Markdown:Basics  (快速入门)</h1><p>标签（空格分隔）： 未分类</p>
+<hr>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h3 id="宗旨"><a href="#宗旨" class="headerlink" title="宗旨"></a>宗旨</h3><p>Markdown 的目标是实现 [易读易写]。<br>Markdown 语法的目标是：成为一种适用于网络的书写语言<br><em>注意</em>： HTML标签，可以直接在Markdown文档中书写<code>&lt;div&gt;</code>、<code>&lt;table&gt;</code>、<code>&lt;pre&gt;</code>、<code>&lt;p&gt;</code>。</p>
+<p>#特殊字符<br> &lt; ：符号用于起始标签，书写原型<code>&amp;lt;</code><br> &amp; ： 符号用于标记HTML实体, 书写原型 <code>&amp;amp;</code></p>
+<p> #标题</p>
+<h3 id="类Setext"><a href="#类Setext" class="headerlink" title="类Setext"></a>类Setext</h3><p>类 Setext 形式是用底线的形式，利用 = （最高阶标题）和 - （第二阶标题）(不限数量)。<br>类 Atx 形式则是在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶。</p>
+<p>#区块引用<br>&gt; :用于标记区块引用。可以偷懒只在每段的第一行使用。也可以嵌套（例如：引用内的引用，需要根据层次使用不同数量。引用的区块内可以正常使用Markdown语法）</p>
+<p>#列表</p>
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>无序列表使用星号、加号或是减号作为列表标记：</p>
+<ul>
+<li>Red</li>
+<li>Green</li>
+<li>Blue<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3>有序列表则使用数字接着一个英文句点：</li>
+</ul>
+<ol>
+<li>Red</li>
+<li>Green</li>
+<li><p>Blue<br>列表项目标记通常在最左边，（可以缩进，最多三个空格），标记右边一定要接最少一个空格<br>列表项目可以包含多个段落，每个项目下的段落必须有四个空格或者一个制表符的缩进<br>如果要在列表项目内放进引用，那 &gt; 就需要缩进<br>如果要放代码区块的话，该区块就需要缩进两次，也就是 8 个空格或是 2 个制表符<br>#代码区块<br>Markdown 会用 <code>&lt;pre&gt;</code> 和 <code>&lt;code&gt;</code> 标签来把代码区块包起来<br>建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以.<br><em>注</em> ：一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。<br>代码区块里面， &amp; 、 &lt; 和 &gt; 会自动转成 HTML 实体，这样的方式让你非常容易使用 Markdown 插入范例用的 HTML 原始码，只需要复制贴上，再加上缩进就可以了，剩下的 Markdown 都会帮你处理<br>#分割线<br>你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格<br>#区段元素<br>###链接<br>Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。<br>不管是哪一种，链接文字都是用 [方括号] 来标记<br><em>行内式</em> ：方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可<br><em>参考式</em>　：的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记，然后，在文件的任意处，你可以把这个标记的链接内容定义出来。<br>　　　链接内容定义的形式为：<br>　　　　　＋方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字<br>　　　　　＋接着一个冒号<br>　　　　　＋接着一个以上的空格或制表符<br>　　　　　＋接着链接的网址<br>　　　　　＋选择性地接着title内容，可以用单引号、双引号或是括弧包着<br><em>隐式链接标记</em>在链接文字后面加上一个空的方括号[Google][]然后定义链接内容：[Google]: <a href="http://google.com/" target="_blank" rel="external">http://google.com/</a><br>#强调#<br>使用星号（<em>）和底线（_）作为标记强调字词的符号，用两个 </em> 或 _ 包起来的话（<strong>强调</strong>），则会被转成 <strong><br>#代码<br>标记一小段行内代码，你可以用反引号把它包起来（`）<br><code>pringf()</code><br>#图片<br>Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： 行内式和参考式。<br>详细叙述如下：</strong></p>
+<p> 一个惊叹号 !</p>
+<pre><code>接着一个方括号，里面放上图片的替代文字
+接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上 选择性的 &apos;title&apos; 文字。
+</code></pre><p>#其它<br>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用方括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样<br>#反斜杠<br>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号<br>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：<br>\   反斜线<br>`   反引号</p>
+</li>
+</ol>
+<ul>
+<li>星号<br>_   底线<br>{}  花括号<br>[]  方括号<br>()  括弧<h1 id="井字号"><a href="#井字号" class="headerlink" title="井字号"></a>井字号</h1></li>
+</ul>
+<ul>
+<li>加号</li>
+</ul>
+<ul>
+<li>减号<br>.   英文句点<br>!   惊叹号</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/10/IntelliJ-IDEA-创建Web项目（全教程）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -532,7 +685,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
