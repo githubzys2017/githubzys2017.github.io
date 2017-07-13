@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="JQuery--tmpl, 动态模板技术">
+<meta property="og:url" content="http://githubzys2017.githut.io/2017/07/13/title- 'JQuery--tmpl, 动态模板技术'/index.html">
+<meta property="og:site_name" content="流光">
+<meta property="og:updated_time" content="2017-07-13T06:48:14.265Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JQuery--tmpl, 动态模板技术">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://githubzys2017.githut.io/2017/07/13/title- 'JQuery--tmpl, 动态模板技术'/"/>
+
+
+
+
+
+  <title> JQuery--tmpl, 动态模板技术 | 流光 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">流光</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://githubzys2017.githut.io/2017/07/13/title- 'JQuery--tmpl, 动态模板技术'/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张永帅">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="流光">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JQuery--tmpl, 动态模板技术
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-13T14:48:07+08:00">
+                2017-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<a id="more"></a>
+<h3 id="动态请求数据来更新页面是现在非常常用的方法，比如博客评论的分页动态加载，微博的滚动加载和定时请求加载等。"><a href="#动态请求数据来更新页面是现在非常常用的方法，比如博客评论的分页动态加载，微博的滚动加载和定时请求加载等。" class="headerlink" title="动态请求数据来更新页面是现在非常常用的方法，比如博客评论的分页动态加载，微博的滚动加载和定时请求加载等。"></a>动态请求数据来更新页面是现在非常常用的方法，比如博客评论的分页动态加载，微博的滚动加载和定时请求加载等。</h3><h3 id="这些情况下，动态请求返回的数据一般不是已拼好的-HTML-就是-JSON-或-XML，总之不在浏览器端拼数据就在服务器端拼数据。不过，从传输量方面来看，返回-HTML-不划算，而在-web-传输方面，现在更多的是使用-JSON-而不是-XML"><a href="#这些情况下，动态请求返回的数据一般不是已拼好的-HTML-就是-JSON-或-XML，总之不在浏览器端拼数据就在服务器端拼数据。不过，从传输量方面来看，返回-HTML-不划算，而在-web-传输方面，现在更多的是使用-JSON-而不是-XML" class="headerlink" title="这些情况下，动态请求返回的数据一般不是已拼好的 HTML 就是 JSON 或 XML，总之不在浏览器端拼数据就在服务器端拼数据。不过，从传输量方面来看，返回 HTML 不划算，而在 web 传输方面，现在更多的是使用 JSON 而不是 XML"></a>这些情况下，动态请求返回的数据一般不是已拼好的 HTML 就是 JSON 或 XML，总之不在浏览器端拼数据就在服务器端拼数据。不过，从传输量方面来看，返回 HTML 不划算，而在 web 传输方面，现在更多的是使用 JSON 而不是 XML</h3><h1 id="需要引用的文件"><a href="#需要引用的文件" class="headerlink" title="需要引用的文件"></a>需要引用的文件</h1><p>需要引用jquery.tmpl.js文件<br>另外需要的js代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&quot;jquery.tmpl.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;script type=&quot;text/x-jquery-tmpl&quot; id=&quot;ticketTmpl&quot;&gt;&lt;/script&gt;</div><div class="line">	$(&quot;#ticketTmpl&quot;).tmpl(e).appendTo(&quot;.add_ticket_place&quot;);</div></pre></td></tr></table></figure></p>
+<p><strong>解析</strong>：    </p>
+<blockquote>
+<ul>
+<li>ticketTmpl：模板，</li>
+<li>add_ticket_place: 模板添加的位置</li>
+<li>e: json数据</li>
+</ul>
+</blockquote>
+<h3 id="jquery-tmpl的几种常用标签分别有："><a href="#jquery-tmpl的几种常用标签分别有：" class="headerlink" title="jquery.tmpl的几种常用标签分别有："></a>jquery.tmpl的几种常用标签分别有：</h3><figure class="highlight plain"><figcaption><span>&#123;&#123;each&#125;&#125;, &#123;&#123;if&#125;&#125;, &#123;&#123;else&#125;&#125;, &#123;&#123;html&#125;&#125;```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 不常用标签：</div><div class="line">``` &#123;&#123;=&#125;&#125;,&#123;&#123;tmpl&#125;&#125; and &#123;&#123;wrap&#125;&#125;.</div></pre></td></tr></table></figure>
+<p><code>${}</code>等同与<code>{{=}}</code>是输出变量 <code>${}</code>里面还可以放表达式 （=和变量之间一定要有空格，否则无效）</p>
+<h4 id="示例代码："><a href="#示例代码：" class="headerlink" title="示例代码："></a>示例代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;div_demo&quot;&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;script id=&quot;demo&quot; type=&quot;text/x-jquery-tmpl&quot;&gt;</div><div class="line">    &lt;div style=&quot;margin-bottom:10px;&quot;&gt;</div><div class="line">    　　&lt;span&gt;$&#123;ID&#125;&lt;/span&gt;</div><div class="line">    　　&lt;span style=&quot;margin-left:10px;&quot;&gt;&#123;&#123;= Name&#125;&#125;&lt;/span&gt;</div><div class="line">    　　&lt;span style=&quot;margin-left:10px;&quot;&gt;$&#123;Number(Num)+1&#125;&lt;/span&gt;</div><div class="line">    　　&lt;span style=&quot;margin-left:10px;&quot;&gt;$&#123;Status&#125;&lt;/span&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">　　var users = [&#123; ID: &apos;think8848&apos;, Name: &apos;Joseph Chan&apos;, Num: &apos;1&apos;, Status: 1 &#125;, &#123; ID: &apos;aCloud&apos;, Name: &apos;Mary Cheung&apos;, Num: &apos;2&apos;&#125;];</div><div class="line">　　$(&quot;#demo&quot;).tmpl(users).appendTo(&apos;#div_demo&apos;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="lt-￼11-gt-提供循环逻辑，-value访问迭代变量-也可以自定义迭代变量-i-value"><a href="#lt-￼11-gt-提供循环逻辑，-value访问迭代变量-也可以自定义迭代变量-i-value" class="headerlink" title="{{each}} 提供循环逻辑，$value访问迭代变量 也可以自定义迭代变量(i,value)"></a><code>{{each}}</code> 提供循环逻辑，<code>$value</code>访问迭代变量 也可以自定义迭代变量<code>(i,value)</code></h3><h4 id="示例代码：-1"><a href="#示例代码：-1" class="headerlink" title="示例代码："></a>示例代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;div_each&quot;&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;script id=&quot;each&quot; type=&quot;text/x-jquery-tmpl&quot;&gt; </div><div class="line">    &lt;h3&gt;users&lt;/h3&gt;</div><div class="line">    &#123;&#123;each(i,user) users&#125;&#125;</div><div class="line">        &lt;div&gt;$&#123;i+1&#125;:&#123;&#123;= user.name&#125;&#125;&lt;/div&gt;</div><div class="line">        &#123;&#123;if i==0&#125;&#125;</div><div class="line">            &lt;h4&gt;group&lt;/h4&gt;</div><div class="line">            &#123;&#123;each(j,group) groups&#125;&#125;</div><div class="line">                &lt;div&gt;$&#123;group.name&#125;&lt;/div&gt;</div><div class="line">            &#123;&#123;/each&#125;&#125;</div><div class="line">        &#123;&#123;/if&#125;&#125;</div><div class="line">    &#123;&#123;/each&#125;&#125;</div><div class="line">    &lt;h3&gt;depart&lt;/h3&gt;</div><div class="line">    &#123;&#123;each departs&#125;&#125;</div><div class="line">        &lt;div&gt;&#123;&#123;= $value.name&#125;&#125;&lt;/div&gt;</div><div class="line">    &#123;&#123;/each&#125;&#125;</div><div class="line">&lt;/script&gt; </div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">　　var eachData = &#123; users: [&#123; name: &apos;jerry&apos; &#125;, &#123; name: &apos;john&apos;&#125;], groups: [&#123; name: &apos;mingdao&apos; &#125;, &#123; name: &apos;meihua&apos; &#125;, &#123; name: &apos;test&apos;&#125;], departs: [&#123; name: &apos;IT&apos;&#125;] &#125;;</div><div class="line">　　$(&quot;#each&quot;).tmpl(eachData).appendTo(&apos;#div_each&apos;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="lt-￼12-gt-lt-￼13-gt-提供了分支逻辑-lt-￼14-gt-相当于else-if"><a href="#lt-￼12-gt-lt-￼13-gt-提供了分支逻辑-lt-￼14-gt-相当于else-if" class="headerlink" title="{{if }} {{else}}提供了分支逻辑{{else}}相当于else if"></a><code>{{if }}</code> <code>{{else}}</code>提供了分支逻辑<code>{{else}}</code>相当于<code>else if</code></h3><h4 id="示例代码：-2"><a href="#示例代码：-2" class="headerlink" title="示例代码："></a>示例代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;div_ifelse&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;script id=&quot;ifelse&quot; type=&quot;text/x-jquery-tmpl&quot;&gt; </div><div class="line">    &lt;div style=&quot;margin-bottom:10px;&quot;&gt;&lt;span&gt;$&#123;ID&#125;&lt;/span&gt;&lt;span style=&quot;margin-left:10px;&quot;&gt;&#123;&#123;= Name&#125;&#125;&lt;/span&gt;</div><div class="line">        &#123;&#123;if Status&#125;&#125;</div><div class="line">            &lt;span&gt;Status$&#123;Status&#125;&lt;/span&gt;</div><div class="line">        &#123;&#123;else App&#125;&#125;</div><div class="line">            &lt;span&gt;App$&#123;App&#125;&lt;/span&gt;</div><div class="line">        &#123;&#123;else&#125;&#125;</div><div class="line">            &lt;span&gt;None&lt;/span&gt;</div><div class="line">        &#123;&#123;/if&#125;&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/script&gt; </div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">　　var users = [&#123; ID: &apos;think8848&apos;, Name: &apos;Joseph Chan&apos;, Status: 1, App: 0 &#125;, &#123; ID: &apos;aCloud&apos;, Name: &apos;Mary Cheung&apos;, App: 1 &#125;, &#123; ID: &apos;bMingdao&apos;, Name: &apos;Jerry Jin&apos;&#125;];</div><div class="line">    $(&quot;#ifelse&quot;).tmpl(users).appendTo(&apos;#div_ifelse&apos;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="lt-￼15-gt-输出变量html-但是没有html编码，适合输出html代码"><a href="#lt-￼15-gt-输出变量html-但是没有html编码，适合输出html代码" class="headerlink" title="{{html}} 输出变量html,但是没有html编码，适合输出html代码"></a><code>{{html}}</code> 输出变量<code>html</code>,但是没有<code>html</code>编码，适合输出<code>html</code>代码</h3><h4 id="示例代码：-3"><a href="#示例代码：-3" class="headerlink" title="示例代码："></a>示例代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;div_html&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;script id=&quot;html&quot; type=&quot;text/x-jquery-tmpl&quot;&gt; </div><div class="line">    &lt;div style=&quot;margin-bottom:10px;&quot;&gt;</div><div class="line">　　　　&lt;span&gt;$&#123;ID&#125;&lt;/span&gt;</div><div class="line">　　　　&lt;span style=&quot;margin-left:10px;&quot;&gt;&#123;&#123;= Name&#125;&#125;&lt;/span&gt;</div><div class="line">    　　$&#123;html&#125;</div><div class="line">    　　&#123;&#123;html html&#125;&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/script&gt; </div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">　　var user = &#123; ID: &apos;think8848&apos;, Name: &apos;Joseph Chan&apos;, html: &apos;&lt;button&gt;html&lt;/button&gt;&apos; &#125;;</div><div class="line">  　$(&quot;#html&quot;).tmpl(user).appendTo(&apos;#div_html&apos;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="lt-￼16-gt-嵌套模版"><a href="#lt-￼16-gt-嵌套模版" class="headerlink" title="{{tmpl}} 嵌套模版"></a><code>{{tmpl}}</code> 嵌套模版</h3><h4 id="示例代码：-4"><a href="#示例代码：-4" class="headerlink" title="示例代码："></a>示例代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;tmpl&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;script id=&quot;tmpl1&quot; type=&quot;text/x-jquery-tmpl&quot;&gt;</div><div class="line">    &lt;div style=&quot;margin-bottom:10px;&quot;&gt;</div><div class="line">    　　&lt;span&gt;$&#123;ID&#125;&lt;/span&gt;</div><div class="line">    　　&lt;span style=&quot;margin-left:10px;&quot;&gt;&#123;&#123;tmpl($data) &apos;#tmpl2&apos;&#125;&#125;&lt;/span&gt;</div><div class="line">    &lt;/div&gt;     </div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script id=&quot;tmpl2&quot; type=&quot;type/x-jquery-tmpl&quot;&gt;</div><div class="line">    &#123;&#123;each Name&#125;&#125;$&#123;$value&#125;  &#123;&#123;/each&#125;&#125;   </div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">　　var users = [&#123; ID: &apos;think8848&apos;, Name: [&apos;Joseph&apos;, &apos;Chan&apos;] &#125;, &#123; ID: &apos;aCloud&apos;, Name: [&apos;Mary&apos;, &apos;Cheung&apos;]&#125;];</div><div class="line">   $(&quot;#tmpl1&quot;).tmpl(users).appendTo(&apos;#tmpl&apos;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="包装器"><a href="#包装器" class="headerlink" title=",包装器"></a>,包装器</h3><h4 id="示例代码：-5"><a href="#示例代码：-5" class="headerlink" title="示例代码："></a>示例代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;wrapDemo&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;script id=&quot;myTmpl&quot; type=&quot;text/x-jquery-tmpl&quot;&gt;</div><div class="line">    The following wraps and reorders some HTML content:</div><div class="line">    &#123;&#123;wrap &quot;#tableWrapper&quot;&#125;&#125;</div><div class="line">        &lt;h3&gt;One&lt;/h3&gt;</div><div class="line">        &lt;div&gt;</div><div class="line">            First &lt;b&gt;content&lt;/b&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">        &lt;h3&gt;Two&lt;/h3&gt;</div><div class="line">        &lt;div&gt;</div><div class="line">            And &lt;em&gt;more&lt;/em&gt; &lt;b&gt;content&lt;/b&gt;...</div><div class="line">        &lt;/div&gt;</div><div class="line">    &#123;&#123;/wrap&#125;&#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;script id=&quot;tableWrapper&quot; type=&quot;text/x-jquery-tmpl&quot;&gt;</div><div class="line">    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;3&quot; border=&quot;1&quot;&gt;&lt;tbody&gt;</div><div class="line">        &lt;tr&gt;</div><div class="line">            &#123;&#123;each $item.html(&quot;h3&quot;, true)&#125;&#125;</div><div class="line">                &lt;td&gt;</div><div class="line">                    $&#123;$value&#125;</div><div class="line">                &lt;/td&gt;</div><div class="line">            &#123;&#123;/each&#125;&#125;</div><div class="line">        &lt;/tr&gt;</div><div class="line">        &lt;tr&gt;</div><div class="line">            &#123;&#123;each $item.html(&quot;div&quot;)&#125;&#125;</div><div class="line">                &lt;td&gt;</div><div class="line">                    &#123;&#123;html $value&#125;&#125;</div><div class="line">                &lt;/td&gt;</div><div class="line">            &#123;&#123;/each&#125;&#125;</div><div class="line">        &lt;/tr&gt;</div><div class="line">    &lt;/tbody&gt;&lt;/table&gt;</div><div class="line">    &lt;/script&gt;</div><div class="line"> &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">        $(function () &#123;</div><div class="line">            $(&apos;#myTmpl&apos;).tmpl().appendTo(&apos;#wrapDemo&apos;);</div><div class="line">        &#125;);</div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="data-item-item代表当前的模板；-data代表当前的数据。"><a href="#data-item-item代表当前的模板；-data代表当前的数据。" class="headerlink" title="$data $item $item代表当前的模板；$data代表当前的数据。"></a><code>$data</code> <code>$item</code> <code>$item</code>代表当前的模板；<code>$data</code>代表当前的数据。</h3><h4 id="示例代码：-6"><a href="#示例代码：-6" class="headerlink" title="示例代码："></a>示例代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;div_item_data&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;script id=&quot;item_data&quot; type=&quot;text/x-jquery-tmpl&quot;&gt; </div><div class="line">     &lt;div style=&quot;margin-bottom:10px;&quot;&gt;</div><div class="line">　　　　&lt;span&gt;$&#123;$data.ID&#125;&lt;/span&gt;</div><div class="line">　　　　&lt;span style=&quot;margin-left:10px;&quot;&gt;$&#123;$item.getName(&quot; &quot;)&#125;&lt;/span&gt;</div><div class="line">　　　&lt;/div&gt;</div><div class="line">&lt;/script&gt; </div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"> 　　var users = [&#123; ID: &apos;think8848&apos;, Name: [&apos;Joseph&apos;, &apos;Chan&apos;] &#125;, &#123; ID: &apos;aCloud&apos;, Name: [&apos;Mary&apos;, &apos;Cheung&apos;]&#125;];</div><div class="line">     $(&quot;#item_data&quot;).tmpl(users,</div><div class="line">                &#123;</div><div class="line">                getName: function (spr) &#123;</div><div class="line">                   return this.data.Name.join(spr);</div><div class="line">                &#125;</div><div class="line">                &#125;).appendTo(&apos;#div_item_data&apos;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="tmplItem-方法，使用这个方法，可以获取从render出来的元素上重新获取-item"><a href="#tmplItem-方法，使用这个方法，可以获取从render出来的元素上重新获取-item" class="headerlink" title="$.tmplItem()方法，使用这个方法，可以获取从render出来的元素上重新获取$item"></a><code>$.tmplItem()</code>方法，使用这个方法，可以获取从<code>render</code>出来的元素上重新获取<code>$item</code></h3><h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">　　$(&apos;#demo&apos;).delegate(&apos;div&apos;, &apos;click&apos;, function () &#123;</div><div class="line">                var item = $.tmplItem(this);</div><div class="line">                alert(item.data.Name);</div><div class="line">            &#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/13/title- 'sql通配符查询'/" rel="next" title="sql通配符查询">
+                <i class="fa fa-chevron-left"></i> sql通配符查询
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/13/title- 'JQuery动态拼接标签事件问题'/" rel="prev" title="JQuery动态拼接标签事件问题">
+                JQuery动态拼接标签事件问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/1.jpg"
+               alt="张永帅" />
+          <p class="site-author-name" itemprop="name">张永帅</p>
+           
+              <p class="site-description motion-element" itemprop="description">业精于勤，荒于嬉！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态请求数据来更新页面是现在非常常用的方法，比如博客评论的分页动态加载，微博的滚动加载和定时请求加载等。"><span class="nav-number">1.</span> <span class="nav-text">动态请求数据来更新页面是现在非常常用的方法，比如博客评论的分页动态加载，微博的滚动加载和定时请求加载等。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这些情况下，动态请求返回的数据一般不是已拼好的-HTML-就是-JSON-或-XML，总之不在浏览器端拼数据就在服务器端拼数据。不过，从传输量方面来看，返回-HTML-不划算，而在-web-传输方面，现在更多的是使用-JSON-而不是-XML"><span class="nav-number">2.</span> <span class="nav-text">这些情况下，动态请求返回的数据一般不是已拼好的 HTML 就是 JSON 或 XML，总之不在浏览器端拼数据就在服务器端拼数据。不过，从传输量方面来看，返回 HTML 不划算，而在 web 传输方面，现在更多的是使用 JSON 而不是 XML</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#需要引用的文件"><span class="nav-number"></span> <span class="nav-text">需要引用的文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jquery-tmpl的几种常用标签分别有："><span class="nav-number">1.</span> <span class="nav-text">jquery.tmpl的几种常用标签分别有：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例代码："><span class="nav-number">1.1.</span> <span class="nav-text">示例代码：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-￼11-gt-提供循环逻辑，-value访问迭代变量-也可以自定义迭代变量-i-value"><span class="nav-number">2.</span> <span class="nav-text">{{each}} 提供循环逻辑，$value访问迭代变量 也可以自定义迭代变量(i,value)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例代码：-1"><span class="nav-number">2.1.</span> <span class="nav-text">示例代码：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-￼12-gt-lt-￼13-gt-提供了分支逻辑-lt-￼14-gt-相当于else-if"><span class="nav-number">3.</span> <span class="nav-text">{{if }} {{else}}提供了分支逻辑{{else}}相当于else if</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例代码：-2"><span class="nav-number">3.1.</span> <span class="nav-text">示例代码：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-￼15-gt-输出变量html-但是没有html编码，适合输出html代码"><span class="nav-number">4.</span> <span class="nav-text">{{html}} 输出变量html,但是没有html编码，适合输出html代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例代码：-3"><span class="nav-number">4.1.</span> <span class="nav-text">示例代码：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-￼16-gt-嵌套模版"><span class="nav-number">5.</span> <span class="nav-text">{{tmpl}} 嵌套模版</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例代码：-4"><span class="nav-number">5.1.</span> <span class="nav-text">示例代码：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包装器"><span class="nav-number">6.</span> <span class="nav-text">,包装器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例代码：-5"><span class="nav-number">6.1.</span> <span class="nav-text">示例代码：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-item-item代表当前的模板；-data代表当前的数据。"><span class="nav-number">7.</span> <span class="nav-text">$data $item $item代表当前的模板；$data代表当前的数据。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例代码：-6"><span class="nav-number">7.1.</span> <span class="nav-text">示例代码：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tmplItem-方法，使用这个方法，可以获取从render出来的元素上重新获取-item"><span class="nav-number">8.</span> <span class="nav-text">$.tmplItem()方法，使用这个方法，可以获取从render出来的元素上重新获取$item</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-number">8.1.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张永帅</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
