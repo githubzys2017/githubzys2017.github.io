@@ -1,0 +1,1209 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="tag:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 数据库的基础">
+<meta property="og:url" content="http://githubzys2017.githut.io/2018/01/14/title- '数据库基础'/index.html">
+<meta property="og:site_name" content="成长之路">
+<meta property="og:description" content="tag:">
+<meta property="og:updated_time" content="2018-01-14T12:45:09.964Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL 数据库的基础">
+<meta name="twitter:description" content="tag:">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://githubzys2017.githut.io/2018/01/14/title- '数据库基础'/"/>
+
+
+
+
+
+  <title> MySQL 数据库的基础 | 成长之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">成长之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://githubzys2017.githut.io/2018/01/14/title- '数据库基础'/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张永帅">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="成长之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL 数据库的基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T20:44:32+08:00">
+                2018-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="tag"><a href="#tag" class="headerlink" title="tag:"></a>tag:</h2><a id="more"></a>
+<h3 id="MySQL-安装方式"><a href="#MySQL-安装方式" class="headerlink" title="MySQL 安装方式"></a>MySQL 安装方式</h3><blockquote>
+<ul>
+<li>MSI 安装包方式安装</li>
+<li>ZIP 解压方式</li>
+</ul>
+</blockquote>
+<h4 id="MySQL-配置修改"><a href="#MySQL-配置修改" class="headerlink" title="MySQL 配置修改"></a>MySQL 配置修改</h4><h5 id="修改默认编码方式"><a href="#修改默认编码方式" class="headerlink" title="修改默认编码方式"></a>修改默认编码方式</h5><blockquote>
+<ul>
+<li>安装目录 –&gt; my.ini</li>
+<li>–&gt; [client] –&gt; port=3306</li>
+<li>–&gt; [mysql] –&gt; default-character-set=utf8</li>
+<li>–&gt; [mysqld] 服务器端配置</li>
+</ul>
+</blockquote>
+<h4 id="登录mysql"><a href="#登录mysql" class="headerlink" title="登录mysql"></a>登录mysql</h4><h5 id="登录和退出"><a href="#登录和退出" class="headerlink" title="登录和退出"></a>登录和退出</h5><blockquote>
+<ul>
+<li>mysql -uroot -p -P3306 -h127.0.0.1</li>
+<li>服务名 用户名 密码 端口号 服务器地址</li>
+<li>exit</li>
+</ul>
+</blockquote>
+<h4 id="修改命令提示符"><a href="#修改命令提示符" class="headerlink" title="修改命令提示符"></a>修改命令提示符</h4><blockquote>
+<ul>
+<li>prompt 提示符</li>
+</ul>
+</blockquote>
+<h4 id="SQL语句规范"><a href="#SQL语句规范" class="headerlink" title="SQL语句规范"></a>SQL语句规范</h4><ul>
+<li>关键字和函数名称全部大写</li>
+<li>数据库名称, 表名称 字段名称全部小写</li>
+<li>SQL语句必须以分号结尾</li>
+</ul>
+<h6 id="查看版本号"><a href="#查看版本号" class="headerlink" title="查看版本号"></a>查看版本号</h6><ul>
+<li>SELECT VERSION();</li>
+</ul>
+<h6 id="设置编码格式"><a href="#设置编码格式" class="headerlink" title="设置编码格式"></a>设置编码格式</h6><ul>
+<li>SET NAMES XXX;</li>
+</ul>
+<h6 id="修改默认结束符"><a href="#修改默认结束符" class="headerlink" title="修改默认结束符"></a>修改默认结束符</h6><ul>
+<li>DELIMITER //<br><strong>将默认结束符”;”修改为”//“</strong></li>
+</ul>
+<h6 id="查看当前时间"><a href="#查看当前时间" class="headerlink" title="查看当前时间"></a>查看当前时间</h6><ul>
+<li>SELECT NOW();</li>
+</ul>
+<h6 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h6><ul>
+<li>CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name [DEFAULT] CHARACTER SET [=] charset_name</li>
+</ul>
+<h6 id="打开数据库"><a href="#打开数据库" class="headerlink" title="打开数据库"></a>打开数据库</h6><ul>
+<li>USE 数据库名称</li>
+</ul>
+<h6 id="查看数据库的结构"><a href="#查看数据库的结构" class="headerlink" title="查看数据库的结构"></a>查看数据库的结构</h6><ul>
+<li>DESC tbl_name;</li>
+</ul>
+<h6 id="当前用户打开的数据库"><a href="#当前用户打开的数据库" class="headerlink" title="当前用户打开的数据库"></a>当前用户打开的数据库</h6><ul>
+<li>SELECT DATABASE();</li>
+</ul>
+<h6 id="修改数据库"><a href="#修改数据库" class="headerlink" title="修改数据库"></a>修改数据库</h6><ul>
+<li>ALTER {DATABASE | SCHEMA} [db_name] [DEFAULT] CHARACTER SET [=] charset_name</li>
+</ul>
+<h6 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h6><ul>
+<li>DROP {DATABASE | SCHEMA} [IF EXISTS] db_name</li>
+</ul>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><h6 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">数据类型</th>
+<th>字节</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">TINYINT</td>
+<td>1</td>
+</tr>
+<tr>
+<td style="text-align:left">SMALLINT</td>
+<td>2</td>
+</tr>
+<tr>
+<td style="text-align:left">MEDIUMINT</td>
+<td>3</td>
+</tr>
+<tr>
+<td style="text-align:left">INT</td>
+<td>4</td>
+</tr>
+<tr>
+<td style="text-align:left">BIGINT</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<h6 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">数据类型</th>
+<th>存储范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">FLOAT[(M, D)]</td>
+<td>小数点后7位</td>
+</tr>
+<tr>
+<td style="text-align:left">DOUBLE[(M, D)]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong> M是数字的总位数, D是小数点后的位数.</p>
+<h4 id="操作表"><a href="#操作表" class="headerlink" title="操作表"></a>操作表</h4><h6 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h6><blockquote>
+<p>CREATE TABLE [IF NO EXISTS] table_name(<br>&nbsp;&nbsp;&nbsp;&nbsp;      column_name data_type,<br>&nbsp;&nbsp;&nbsp;&nbsp;    ……<br>)</p>
+</blockquote>
+<h6 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h6><ul>
+<li>添加单列 ALTER TABLE tbl_name ADD [COLUMN] col_name column_definition [FIRST |  AFTER col_name];</li>
+<li>删除列 ALTER TABLE tbl_name DROP [COLUMN] col_name;</li>
+</ul>
+<h6 id="添加约束"><a href="#添加约束" class="headerlink" title="添加约束"></a>添加约束</h6><ul>
+<li>添加主键约束 ALTER TABLE tbl_name ADD [CONSTRAINT[symbol]] PRIMARY KEY [index_type] (inde_col_name,…)</li>
+<li>添加唯一约束 ALTER TABLE tbl_name ADD [CONSTRAINT[symbol]] UNIQUE KEY [index_type] (inde_col_name,…)</li>
+<li>添加外键约束 ALTER TABLE table_name ADD [CONSTRAINT [symbol]] FOREIGN KEY [index_name] (index_col_name, …) reference_definition<h6 id="修改约束"><a href="#修改约束" class="headerlink" title="修改约束"></a>修改约束</h6></li>
+<li>添加/删除默认约束 ALTER TABLE table_name ALTER [COLUMN] col_name {SET DEFAULT literal | DROP DEFAULT}</li>
+<li>删除主键约束 ALTER TABLE tbl_name DROP PRIMARY KEY</li>
+<li>删除唯一约束 ALTER TABLE tbl_name DROP {INDEX|KEY} index_name</li>
+<li>删除外键约束 ALTER TABLE tbl_name DROP FOREIGN KEY fk_symbol</li>
+</ul>
+<h6 id="修改数据表"><a href="#修改数据表" class="headerlink" title="修改数据表"></a>修改数据表</h6><ul>
+<li>修改列定义 ALTER TABLE tbl_name MODIFY [COLUMN] col_name column_definition [FIRST|AFTER col_name]</li>
+<li>修改列名称 ALTER TABLE tbl_name CHANGE col_name1  col_name2 column_definition [FIRST|AFTER col_name3]</li>
+<li>数据表更名 ALTER TABLE tbl_name RENAME [TO|AS] new tbl_name</li>
+<li>数据表更名 RENAME TABLE tbl_name TO new_tbl_name [, tbl_name,…]</li>
+</ul>
+<h6 id="查看数据表列表"><a href="#查看数据表列表" class="headerlink" title="查看数据表列表"></a>查看数据表列表</h6><ul>
+<li>SHOW TABLES [FROM db_name] [LIKE ‘pattern’ | WHERE expr]</li>
+</ul>
+<h6 id="查看数据表的结构"><a href="#查看数据表的结构" class="headerlink" title="查看数据表的结构"></a>查看数据表的结构</h6><ul>
+<li>SHOW COLUMNS FROM tbl_name</li>
+</ul>
+<h6 id="插入记录"><a href="#插入记录" class="headerlink" title="插入记录"></a>插入记录</h6><ul>
+<li>INSERT [INTO] tbl_name [(col_name,…)] VALUES(val,…)</li>
+</ul>
+<h6 id="查找记录"><a href="#查找记录" class="headerlink" title="查找记录"></a>查找记录</h6><p>SELECT expr,… FROM tbl_name</p>
+<h4 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h4><blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">约束</th>
+<th style="text-align:left">名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">NOT NULL</td>
+<td style="text-align:left">非空约束</td>
+</tr>
+<tr>
+<td style="text-align:left">PRIMARY KEY</td>
+<td style="text-align:left">主键约束</td>
+</tr>
+<tr>
+<td style="text-align:left">UNIQUE KEY</td>
+<td style="text-align:left">唯一约束</td>
+</tr>
+<tr>
+<td style="text-align:left">DEFAULT</td>
+<td style="text-align:left">默认约束</td>
+</tr>
+<tr>
+<td style="text-align:left">FOREIGN KEY</td>
+<td style="text-align:left">外键约束</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h6 id="FOREIGN-KEY-外键约束"><a href="#FOREIGN-KEY-外键约束" class="headerlink" title="FOREIGN KEY 外键约束"></a>FOREIGN KEY 外键约束</h6><blockquote>
+<ol>
+<li>父表和子表必须使用相同的存储引擎, 禁止使用临时表</li>
+<li>存储引擎InnoDB.</li>
+<li>外键列和参照列必须具有相似的数据结构.数字的长度和是否有符号位必须相同;而字符的长度则可以不同.</li>
+<li>外键列和参照列必须创建索引</li>
+</ol>
+</blockquote>
+<h6 id="外键约束的参照操作"><a href="#外键约束的参照操作" class="headerlink" title="外键约束的参照操作"></a>外键约束的参照操作</h6><blockquote>
+<ol>
+<li>CASCADE: 从父表删除或更新且自动删除或更新子表中匹配的行</li>
+<li>SET NULL: 从父表删除或更新行,并设置子表的外键列为NULL.如果使用该选项.必须保证子表列没有指定NOT NULL.</li>
+<li>RESTRICT: 拒绝对父表的删除或更新操作.<br>4 NO ACTION: 标准SQL的关键字, 在MSQL中与RESTRICT相同</li>
+</ol>
+</blockquote>
+<h6 id="显示索引"><a href="#显示索引" class="headerlink" title="显示索引"></a>显示索引</h6><ul>
+<li>SHOW INDEXES FROM provinces;</li>
+</ul>
+<h6 id="查询表结构"><a href="#查询表结构" class="headerlink" title="查询表结构"></a>查询表结构</h6><ul>
+<li>SHOW COLUMNS FROM tbl_name;</li>
+</ul>
+<h6 id="插入记录-1"><a href="#插入记录-1" class="headerlink" title="插入记录"></a>插入记录</h6><ul>
+<li>INSERT [INTO] tbl_name [(col_name,…)] {VALUES|VALUE} ({expr|DEFAULT},…),(…),…</li>
+<li>INSERT [INTO] tbl_name SET col_name={expr|DEFAULT},…<br><em>与第一种的区别,此方法可以使用子查询</em></li>
+<li>INSERT [INTO] tbl_name [(col_name,…)] SELECT …<br><em>此方法可以将查询结果插入到指定数据表.</em></li>
+</ul>
+<h6 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h6><ul>
+<li>单表更新 UPDATE [LOW_PRIORITY] [IGNORE] table_reference SET col_name1={expr1|DEFAULT} [, col_name2={expr2|DEFAULT}]… [WHERE where_condition]</li>
+<li>多表更新 UPDATE table_references SET col_name1 = {expr1|DEFAULT} [, col_name2 = {expr2|DEFAULT}]…[WHERE where_condition]</li>
+</ul>
+<h6 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h6><ul>
+<li>单表删除 DELETE FROM tbl_name [WHERE where_condition]</li>
+<li>多表删除 DELETE tbl_name[.<em>] [, tbl_name[.</em>]]… FROM table_references [WHERE where_condition]</li>
+</ul>
+<h6 id="清除mysql表中的数据"><a href="#清除mysql表中的数据" class="headerlink" title="清除mysql表中的数据"></a>清除mysql表中的数据</h6><ul>
+<li>DELETE FROM tbl_name;(不记录日志,删除后不能恢复)<br><strong>不带WHERE参数可以删除表中的所有内容</strong></li>
+<li>TRUNCATE TABLE  tbl_name;(保留数据结构,重新创建表)</li>
+</ul>
+<h6 id="查找记录-1"><a href="#查找记录-1" class="headerlink" title="查找记录"></a>查找记录</h6><ul>
+<li>SELECT select_expr [, select_expr…]<br>[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[FROM table_references]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[WHERE where_condition]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[GROUP BY {col_name|position} [ASC | DESC],…]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[HAVING where_condition]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ORDER BY {col_name | expr | position} [ASC|DESC],…]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LIMIT {[offset,] row_count | row_count OFFSET offset}]<br>]</li>
+</ul>
+<h4 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h4><blockquote>
+<p>ANY<br>SOME<br>ALL</p>
+</blockquote>
+<h6 id="CREATE…-SELECT"><a href="#CREATE…-SELECT" class="headerlink" title="CREATE… SELECT"></a>CREATE… SELECT</h6><ul>
+<li>创建数据表同时将查询结果写入到数据表</li>
+<li>CREATE TABLE [IF NOT EXISTS] tbl_name [(create_definition,…)] select_statement</li>
+</ul>
+<h6 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h6><ul>
+<li>INNER JOIN, 内连接 , <em>在mysql中, JOIN, CROSS JOIN 和 INNER JOIN是等价的</em><br><strong>仅显示符合连接条件的记录</strong></li>
+<li>LEFT [OUTER] JOIN, 左外连接<br><strong>显示左表中的全部和右表中符合条件的记录</strong></li>
+<li>RIGHT [OUTER] JOIN, 右外连接<br><strong>显示右表中的全部和左表中符合条件的记录</strong></li>
+</ul>
+<h4 id="运算符和函数"><a href="#运算符和函数" class="headerlink" title="运算符和函数"></a>运算符和函数</h4><h6 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CONCAT()</td>
+<td style="text-align:left">字符连接</td>
+</tr>
+<tr>
+<td style="text-align:left">CONCAT_WS()</td>
+<td style="text-align:left">使用指定的分隔符进行字符连接</td>
+</tr>
+<tr>
+<td style="text-align:left">FORMAT()</td>
+<td style="text-align:left">数字格式化</td>
+</tr>
+<tr>
+<td style="text-align:left">LOWER()</td>
+<td style="text-align:left">转换成小写字母</td>
+</tr>
+<tr>
+<td style="text-align:left">UPPER()</td>
+<td style="text-align:left">转换成大写字母</td>
+</tr>
+<tr>
+<td style="text-align:left">LEFT()</td>
+<td style="text-align:left">获取左侧字符</td>
+</tr>
+<tr>
+<td style="text-align:left">RIGHT()</td>
+<td style="text-align:left">获取右侧字符</td>
+</tr>
+<tr>
+<td style="text-align:left">LENGTH()</td>
+<td style="text-align:left">获取字符串长度</td>
+</tr>
+<tr>
+<td style="text-align:left">LTRIM()</td>
+<td style="text-align:left">删除前导空格</td>
+</tr>
+<tr>
+<td style="text-align:left">RTRIM()</td>
+<td style="text-align:left">删除后续空格</td>
+</tr>
+<tr>
+<td style="text-align:left">TRIM()</td>
+<td style="text-align:left">删除前导和后续空格</td>
+</tr>
+<tr>
+<td style="text-align:left">SUBSTRING()</td>
+<td style="text-align:left">字符串截取</td>
+</tr>
+<tr>
+<td style="text-align:left">[NOT] LIKE</td>
+<td style="text-align:left">模式匹配</td>
+</tr>
+<tr>
+<td style="text-align:left">REPLACE()</td>
+<td style="text-align:left">字符串替换</td>
+</tr>
+</tbody>
+</table>
+<h6 id="数值运算符和函数"><a href="#数值运算符和函数" class="headerlink" title="数值运算符和函数"></a>数值运算符和函数</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CEIL()</td>
+<td style="text-align:left">进一取整</td>
+</tr>
+<tr>
+<td style="text-align:left">DIV</td>
+<td style="text-align:left">整数触发</td>
+</tr>
+<tr>
+<td style="text-align:left">FLOOR</td>
+<td style="text-align:left">舍一取整</td>
+</tr>
+<tr>
+<td style="text-align:left">MOD</td>
+<td style="text-align:left">取余数(取模)</td>
+</tr>
+<tr>
+<td style="text-align:left">POWER()</td>
+<td style="text-align:left">幂运算</td>
+</tr>
+<tr>
+<td style="text-align:left">ROUND</td>
+<td style="text-align:left">s四舍五入</td>
+</tr>
+<tr>
+<td style="text-align:left">TRUNCATE()</td>
+<td style="text-align:left">数字截取</td>
+</tr>
+</tbody>
+</table>
+<h6 id="比较运算符与函数"><a href="#比较运算符与函数" class="headerlink" title="比较运算符与函数"></a>比较运算符与函数</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">[NOT] BETWEEN…AND…</td>
+<td style="text-align:left">[不]在范围之内</td>
+</tr>
+<tr>
+<td style="text-align:left">[NOT] IN()</td>
+<td style="text-align:left">[不]在列出值范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">IS [NOT] NULL</td>
+<td style="text-align:left">[不]为空</td>
+</tr>
+</tbody>
+</table>
+<h6 id="日期时间函数"><a href="#日期时间函数" class="headerlink" title="日期时间函数"></a>日期时间函数</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">NOW()</td>
+<td style="text-align:left">当前日期和时间</td>
+</tr>
+<tr>
+<td style="text-align:left">CURDATE()</td>
+<td style="text-align:left">当前日期</td>
+</tr>
+<tr>
+<td style="text-align:left">CURTIME()</td>
+<td style="text-align:left">当前时间</td>
+</tr>
+<tr>
+<td style="text-align:left">DATA_ADD()</td>
+<td style="text-align:left">日期变化(<strong>INTERVAL XX DAY</strong>)(DAY, WEEK, YEAR)</td>
+</tr>
+<tr>
+<td style="text-align:left">DATEDIFF()</td>
+<td style="text-align:left">日期差值</td>
+</tr>
+<tr>
+<td style="text-align:left">DATE_FORMAT()</td>
+<td style="text-align:left">日期格式化</td>
+</tr>
+</tbody>
+</table>
+<h6 id="信息函数"><a href="#信息函数" class="headerlink" title="信息函数"></a>信息函数</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CONNECTION_ID()</td>
+<td style="text-align:left">连接ID</td>
+</tr>
+<tr>
+<td style="text-align:left">DATABASE()</td>
+<td style="text-align:left">当前数据库</td>
+</tr>
+<tr>
+<td style="text-align:left">LAST_INSERT_ID()</td>
+<td style="text-align:left">最后插入记录的id号</td>
+</tr>
+<tr>
+<td style="text-align:left">USER()</td>
+<td style="text-align:left">当前用户</td>
+</tr>
+<tr>
+<td style="text-align:left">VERSION()</td>
+<td style="text-align:left">版本信息</td>
+</tr>
+</tbody>
+</table>
+<h6 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AVG()</td>
+<td style="text-align:left">平均值</td>
+</tr>
+<tr>
+<td style="text-align:left">COUNT()</td>
+<td style="text-align:left">计数</td>
+</tr>
+<tr>
+<td style="text-align:left">MAX()</td>
+<td style="text-align:left">最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">MIN()</td>
+<td style="text-align:left">最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">SUM()</td>
+<td style="text-align:left">求和</td>
+</tr>
+</tbody>
+</table>
+<h6 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">MD5()</td>
+<td style="text-align:left">信息摘要算法</td>
+</tr>
+<tr>
+<td style="text-align:left">PASSWORD()</td>
+<td style="text-align:left">密码算法</td>
+</tr>
+</tbody>
+</table>
+<h6 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h6><ul>
+<li>删除自定义函数 DROP FUNCTION function_name</li>
+<li>创建自定义函数 CREATE FUNCTION function_name RETURNS {STRING|INTEGER|REAL|DECIMAL} routine_body<blockquote>
+<ol>
+<li>函数体由合法的SQL语句构成;</li>
+<li>函数体可以是简单的SELECT或INSERT;</li>
+<li>函数体如果为复合结构则使用BEGIN…END语句;</li>
+<li>复合结构可以包含声明, 循环, 控制结构;</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h4 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h4><blockquote>
+<p>存储过程是SQL语句和控制语句的预编译集合, 以一个名称存储并作为一个单元处理</p>
+<h5 id="存储过程的优点"><a href="#存储过程的优点" class="headerlink" title="存储过程的优点"></a>存储过程的优点</h5><ul>
+<li>增强SQL语句的功能和灵活性</li>
+<li>实现了较快的执行速度</li>
+<li>减少了网络流量</li>
+</ul>
+</blockquote>
+<h6 id="创建存储过程"><a href="#创建存储过程" class="headerlink" title="创建存储过程"></a>创建存储过程</h6><ul>
+<li>CREATE [DEFINER = {user|CURRENT_USER}] PROCEDURE sp_name ([proc_parameter[,…]]) [characteristic…] routine_body proc_parameter: [IN|OUT|INOUT] param_name type</li>
+<li>IN , 表示该参数的值必须在调用存储过程时指定</li>
+<li>OUT, 表示该参数的值可以被存储过程改变, 并且可以返回</li>
+<li>INOUT, 表示该参数的调用时指定, 并且可以被改变和返回</li>
+</ul>
+<h6 id="过程体"><a href="#过程体" class="headerlink" title="过程体"></a>过程体</h6><ul>
+<li>过程体由合法的SQL语句构成</li>
+<li>过程体可以是任意SQL语句</li>
+<li>过程体如果为复合结构则使用BEGIN…END语句</li>
+<li>复合语句可以包含声明,循环,控制语句;</li>
+<li>参数列表的名字不能和数据库字段名相同</li>
+</ul>
+<h6 id="调用存储过程"><a href="#调用存储过程" class="headerlink" title="调用存储过程"></a>调用存储过程</h6><ul>
+<li>CALL sp_name([parameter[,…]])</li>
+<li>CALL sp_name[()]</li>
+</ul>
+<blockquote>
+<p> DELIMITER //<br>CREATE PROCEDURE removeUserById(IN id SMALLINT UNSIGNED)<br>BEGIN<br>DELETE FROM users WHERE id = id;<br>END<br>//<br>DELIMITER ;</p>
+</blockquote>
+<h6 id="删除存储过程"><a href="#删除存储过程" class="headerlink" title="删除存储过程"></a>删除存储过程</h6><ul>
+<li>DROP PROCEDURE [IF EXISTS] sp_name</li>
+</ul>
+<h4 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h4><ul>
+<li>用户变量 SET @变量名 = value; | SELECT @变量名 := value</li>
+<li>全局变量 SET GLOBAL var | SET @@global.var 所有客户端生效,只有super权限才可以设置全局变量</li>
+<li>局部变量 declare c int default 0;</li>
+<li>会话变量<blockquote>
+<p>设置会话变量有如下三种方式：</p>
+<blockquote>
+<p>set session var_name = value;<br>set @@session.var_name = value;<br>set var_name = value;<br>查看一个会话变量也有如下三种方式：<br>select @@var_name;<br>select @@session.var_name;<br>show session variables like “%var%”;</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h4 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h4><h6 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h6><ul>
+<li>MyISAM</li>
+<li>InnoDB</li>
+<li>Memory</li>
+<li>CSV</li>
+<li>Archive</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/10/title- '理解和解决Java并发修改异常ConcurrentModificationException'/" rel="next" title="理解和解决Java并发修改异常ConcurrentModificationException">
+                <i class="fa fa-chevron-left"></i> 理解和解决Java并发修改异常ConcurrentModificationException
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/1.jpg"
+               alt="张永帅" />
+          <p class="site-author-name" itemprop="name">张永帅</p>
+           
+              <p class="site-description motion-element" itemprop="description">业精于勤，荒于嬉！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tag"><span class="nav-number">1.</span> <span class="nav-text">tag:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-安装方式"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL 安装方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-配置修改"><span class="nav-number">1.1.1.</span> <span class="nav-text">MySQL 配置修改</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#修改默认编码方式"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">修改默认编码方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录mysql"><span class="nav-number">1.1.2.</span> <span class="nav-text">登录mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#登录和退出"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">登录和退出</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改命令提示符"><span class="nav-number">1.1.3.</span> <span class="nav-text">修改命令提示符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL语句规范"><span class="nav-number">1.1.4.</span> <span class="nav-text">SQL语句规范</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#查看版本号"><span class="nav-number">1.1.4.0.1.</span> <span class="nav-text">查看版本号</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#设置编码格式"><span class="nav-number">1.1.4.0.2.</span> <span class="nav-text">设置编码格式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修改默认结束符"><span class="nav-number">1.1.4.0.3.</span> <span class="nav-text">修改默认结束符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看当前时间"><span class="nav-number">1.1.4.0.4.</span> <span class="nav-text">查看当前时间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#创建数据库"><span class="nav-number">1.1.4.0.5.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#打开数据库"><span class="nav-number">1.1.4.0.6.</span> <span class="nav-text">打开数据库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看数据库的结构"><span class="nav-number">1.1.4.0.7.</span> <span class="nav-text">查看数据库的结构</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#当前用户打开的数据库"><span class="nav-number">1.1.4.0.8.</span> <span class="nav-text">当前用户打开的数据库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修改数据库"><span class="nav-number">1.1.4.0.9.</span> <span class="nav-text">修改数据库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除数据库"><span class="nav-number">1.1.4.0.10.</span> <span class="nav-text">删除数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据类型"><span class="nav-number">1.1.5.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#整型"><span class="nav-number">1.1.5.0.1.</span> <span class="nav-text">整型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#浮点型"><span class="nav-number">1.1.5.0.2.</span> <span class="nav-text">浮点型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作表"><span class="nav-number">1.1.6.</span> <span class="nav-text">操作表</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建表"><span class="nav-number">1.1.6.0.1.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修改表"><span class="nav-number">1.1.6.0.2.</span> <span class="nav-text">修改表</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#添加约束"><span class="nav-number">1.1.6.0.3.</span> <span class="nav-text">添加约束</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修改约束"><span class="nav-number">1.1.6.0.4.</span> <span class="nav-text">修改约束</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修改数据表"><span class="nav-number">1.1.6.0.5.</span> <span class="nav-text">修改数据表</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看数据表列表"><span class="nav-number">1.1.6.0.6.</span> <span class="nav-text">查看数据表列表</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看数据表的结构"><span class="nav-number">1.1.6.0.7.</span> <span class="nav-text">查看数据表的结构</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#插入记录"><span class="nav-number">1.1.6.0.8.</span> <span class="nav-text">插入记录</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查找记录"><span class="nav-number">1.1.6.0.9.</span> <span class="nav-text">查找记录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#约束"><span class="nav-number">1.1.7.</span> <span class="nav-text">约束</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#FOREIGN-KEY-外键约束"><span class="nav-number">1.1.7.0.1.</span> <span class="nav-text">FOREIGN KEY 外键约束</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#外键约束的参照操作"><span class="nav-number">1.1.7.0.2.</span> <span class="nav-text">外键约束的参照操作</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#显示索引"><span class="nav-number">1.1.7.0.3.</span> <span class="nav-text">显示索引</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查询表结构"><span class="nav-number">1.1.7.0.4.</span> <span class="nav-text">查询表结构</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#插入记录-1"><span class="nav-number">1.1.7.0.5.</span> <span class="nav-text">插入记录</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#更新记录"><span class="nav-number">1.1.7.0.6.</span> <span class="nav-text">更新记录</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除记录"><span class="nav-number">1.1.7.0.7.</span> <span class="nav-text">删除记录</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#清除mysql表中的数据"><span class="nav-number">1.1.7.0.8.</span> <span class="nav-text">清除mysql表中的数据</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查找记录-1"><span class="nav-number">1.1.7.0.9.</span> <span class="nav-text">查找记录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子查询"><span class="nav-number">1.1.8.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#CREATE…-SELECT"><span class="nav-number">1.1.8.0.1.</span> <span class="nav-text">CREATE… SELECT</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#连接查询"><span class="nav-number">1.1.8.0.2.</span> <span class="nav-text">连接查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算符和函数"><span class="nav-number">1.1.9.</span> <span class="nav-text">运算符和函数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字符函数"><span class="nav-number">1.1.9.0.1.</span> <span class="nav-text">字符函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#数值运算符和函数"><span class="nav-number">1.1.9.0.2.</span> <span class="nav-text">数值运算符和函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#比较运算符与函数"><span class="nav-number">1.1.9.0.3.</span> <span class="nav-text">比较运算符与函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#日期时间函数"><span class="nav-number">1.1.9.0.4.</span> <span class="nav-text">日期时间函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#信息函数"><span class="nav-number">1.1.9.0.5.</span> <span class="nav-text">信息函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#聚合函数"><span class="nav-number">1.1.9.0.6.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#加密函数"><span class="nav-number">1.1.9.0.7.</span> <span class="nav-text">加密函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#自定义函数"><span class="nav-number">1.1.9.0.8.</span> <span class="nav-text">自定义函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储过程"><span class="nav-number">1.1.10.</span> <span class="nav-text">存储过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#存储过程的优点"><span class="nav-number">1.1.10.1.</span> <span class="nav-text">存储过程的优点</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建存储过程"><span class="nav-number">1.1.10.1.1.</span> <span class="nav-text">创建存储过程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#过程体"><span class="nav-number">1.1.10.1.2.</span> <span class="nav-text">过程体</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#调用存储过程"><span class="nav-number">1.1.10.1.3.</span> <span class="nav-text">调用存储过程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除存储过程"><span class="nav-number">1.1.10.1.4.</span> <span class="nav-text">删除存储过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#声明变量"><span class="nav-number">1.1.11.</span> <span class="nav-text">声明变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储引擎"><span class="nav-number">1.1.12.</span> <span class="nav-text">存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#分类"><span class="nav-number">1.1.12.0.1.</span> <span class="nav-text">分类</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张永帅</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
