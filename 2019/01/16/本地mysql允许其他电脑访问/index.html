@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -87,13 +87,14 @@
 
 
 
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="订单号生成策略">
-<meta property="og:url" content="http://githubzys2017.githut.io/2018/12/22/title- '订单号生成策略'/index.html">
+<meta property="og:title" content="本地的mysql数据库设置允许其他电脑访问">
+<meta property="og:url" content="http://githubzys2017.githut.io/2019/01/16/本地mysql允许其他电脑访问/index.html">
 <meta property="og:site_name" content="成长之路">
-<meta property="og:updated_time" content="2017-11-22T00:51:46.000Z">
+<meta property="og:updated_time" content="2019-01-17T01:21:37.632Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="订单号生成策略">
+<meta name="twitter:title" content="本地的mysql数据库设置允许其他电脑访问">
 
 
 
@@ -121,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://githubzys2017.githut.io/2018/12/22/title- '订单号生成策略'/"/>
+  <link rel="canonical" href="http://githubzys2017.githut.io/2019/01/16/本地mysql允许其他电脑访问/"/>
 
 
 
 
 
-  <title> 订单号生成策略 | 成长之路 </title>
+  <title> 本地的mysql数据库设置允许其他电脑访问 | 成长之路 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -276,7 +277,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://githubzys2017.githut.io/2018/12/22/title- '订单号生成策略'/">
+    <link itemprop="mainEntityOfPage" href="http://githubzys2017.githut.io/2019/01/16/本地mysql允许其他电脑访问/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张永帅">
@@ -297,7 +298,7 @@
             
             
               
-                订单号生成策略
+                本地的mysql数据库设置允许其他电脑访问
               
             
           </h1>
@@ -312,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-22T00:10:23+08:00">
-                2018-12-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-16T09:39:00+08:00">
+                2019-01-16
               </time>
             
 
@@ -350,11 +351,7 @@
       
         <hr>
 <a id="more"></a>
-<h3 id="订单号生成策略"><a href="#订单号生成策略" class="headerlink" title="订单号生成策略"></a><strong>订单号生成策略</strong></h3><h4 id="唯一性"><a href="#唯一性" class="headerlink" title="唯一性"></a>唯一性</h4><h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><h4 id="不能使用大规模随机码"><a href="#不能使用大规模随机码" class="headerlink" title="不能使用大规模随机码"></a>不能使用大规模随机码</h4><h4 id="防止并发"><a href="#防止并发" class="headerlink" title="防止并发"></a>防止并发</h4><h4 id="控制位数"><a href="#控制位数" class="headerlink" title="控制位数"></a>控制位数</h4><h3 id="怎么保证订单的唯一性"><a href="#怎么保证订单的唯一性" class="headerlink" title="怎么保证订单的唯一性"></a><strong>怎么保证订单的唯一性</strong></h3><h4 id="订单号命名规则来生成"><a href="#订单号命名规则来生成" class="headerlink" title="订单号命名规则来生成"></a>订单号命名规则来生成</h4><blockquote>
-<p>比如“业务编码 + 时间戳 + 机器编号[前4位] + 随机4位数 + 毫秒数”。</p>
-</blockquote>
-<h4 id="全局订单号数据生成池-生成订单"><a href="#全局订单号数据生成池-生成订单" class="headerlink" title="全局订单号数据生成池,生成订单"></a>全局订单号数据生成池,生成订单</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE `order_id_generator` (</div><div class="line">  `RANDOM_VALUE` bigint(20) NOT NULL,</div><div class="line">  `ORDER_ID` int(11) NOT NULL,</div><div class="line">  PRIMARY KEY (`RANDOM_VALUE`)</div><div class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8;</div><div class="line"></div><div class="line">DROP PROCEDURE IF EXISTS `GET_ORDER_ID_FOR_REGISTER`;</div><div class="line">DELIMITER ;;</div><div class="line">CREATE DEFINER=`root`@`%` PROCEDURE `GET_ORDER_ID_FOR_REGISTER`()</div><div class="line">BEGIN</div><div class="line">    declare userMid int defau]\</div></pre></td></tr></table></figure>
-
+<h4 id="第一步-直接关闭windows防火墙-属于简单粗暴的方法-或者把3306端口添加到防火墙允许通过的列表里去"><a href="#第一步-直接关闭windows防火墙-属于简单粗暴的方法-或者把3306端口添加到防火墙允许通过的列表里去" class="headerlink" title="第一步: 直接关闭windows防火墙,属于简单粗暴的方法,或者把3306端口添加到防火墙允许通过的列表里去."></a>第一步: 直接关闭windows防火墙,属于简单粗暴的方法,或者把3306端口添加到防火墙允许通过的列表里去.</h4><h4 id="第二部-修改MySQL数据库中mysql数据库的user表-将里面host字段的值改为-localhost只能允许本地访问-允许所有人访问-然后重启mysql服务"><a href="#第二部-修改MySQL数据库中mysql数据库的user表-将里面host字段的值改为-localhost只能允许本地访问-允许所有人访问-然后重启mysql服务" class="headerlink" title="第二部: 修改MySQL数据库中mysql数据库的user表,将里面host字段的值改为%(localhost只能允许本地访问,%允许所有人访问),然后重启mysql服务"></a>第二部: 修改MySQL数据库中mysql数据库的user表,将里面host字段的值改为<code>%</code>(<code>localhost</code>只能允许本地访问,<code>%</code>允许所有人访问),然后重启mysql服务</h4>
       
     </div>
 
@@ -381,6 +378,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
 
       
         
@@ -390,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/22/title- '理解和解决Java并发修改异常ConcurrentModificationException'/" rel="next" title="理解和解决Java并发修改异常ConcurrentModificationException">
-                <i class="fa fa-chevron-left"></i> 理解和解决Java并发修改异常ConcurrentModificationException
+              <a href="/2019/01/14/cron表达式/" rel="next" title="springboot定时任务配置">
+                <i class="fa fa-chevron-left"></i> springboot定时任务配置
               </a>
             
           </div>
@@ -400,8 +403,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/22/title- Hello World/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/18/mysql基本函数/" rel="prev" title="MYSQL 函数">
+                MYSQL 函数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -522,7 +525,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#订单号生成策略"><span class="nav-number">1.</span> <span class="nav-text">订单号生成策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#唯一性"><span class="nav-number">1.1.</span> <span class="nav-text">唯一性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全性"><span class="nav-number">1.2.</span> <span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不能使用大规模随机码"><span class="nav-number">1.3.</span> <span class="nav-text">不能使用大规模随机码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防止并发"><span class="nav-number">1.4.</span> <span class="nav-text">防止并发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#控制位数"><span class="nav-number">1.5.</span> <span class="nav-text">控制位数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么保证订单的唯一性"><span class="nav-number">2.</span> <span class="nav-text">怎么保证订单的唯一性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#订单号命名规则来生成"><span class="nav-number">2.1.</span> <span class="nav-text">订单号命名规则来生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局订单号数据生成池-生成订单"><span class="nav-number">2.2.</span> <span class="nav-text">全局订单号数据生成池,生成订单</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步-直接关闭windows防火墙-属于简单粗暴的方法-或者把3306端口添加到防火墙允许通过的列表里去"><span class="nav-number">1.</span> <span class="nav-text">第一步: 直接关闭windows防火墙,属于简单粗暴的方法,或者把3306端口添加到防火墙允许通过的列表里去.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二部-修改MySQL数据库中mysql数据库的user表-将里面host字段的值改为-localhost只能允许本地访问-允许所有人访问-然后重启mysql服务"><span class="nav-number">2.</span> <span class="nav-text">第二部: 修改MySQL数据库中mysql数据库的user表,将里面host字段的值改为%(localhost只能允许本地访问,%允许所有人访问),然后重启mysql服务</span></a></li></ol></div>
             
 
           </div>

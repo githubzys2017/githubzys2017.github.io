@@ -87,17 +87,14 @@
 
 
 
-<meta name="description" content="使用spring task使用maven依赖的项目,需要在pom文件添加依赖:1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;">
 <meta name="keywords" content="springboot定时任务  Scheduled Cron表达式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springboot定时任务配置">
 <meta property="og:url" content="http://githubzys2017.githut.io/2019/01/14/springboot 定时任务/index.html">
 <meta property="og:site_name" content="成长之路">
-<meta property="og:description" content="使用spring task使用maven依赖的项目,需要在pom文件添加依赖:1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;">
-<meta property="og:updated_time" content="2019-01-15T08:29:14.323Z">
+<meta property="og:updated_time" content="2019-01-15T08:34:20.954Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot定时任务配置">
-<meta name="twitter:description" content="使用spring task使用maven依赖的项目,需要在pom文件添加依赖:1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;">
 
 
 
@@ -352,7 +349,8 @@
       
 
       
-        <a id="more"></a>
+        <hr>
+<a id="more"></a>
 <h2 id="使用spring-task"><a href="#使用spring-task" class="headerlink" title="使用spring task"></a>使用spring task</h2><h3 id="使用maven依赖的项目-需要在pom文件添加依赖"><a href="#使用maven依赖的项目-需要在pom文件添加依赖" class="headerlink" title="使用maven依赖的项目,需要在pom文件添加依赖:"></a>使用maven依赖的项目,需要在pom文件添加依赖:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
 <h3 id="创建定时任务类型"><a href="#创建定时任务类型" class="headerlink" title="创建定时任务类型"></a>创建定时任务类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">@Slf4j      //日志注解,可以直接使用log</div><div class="line">@Component      //组件注入spring容器</div><div class="line">public class ScheduledTask &#123;</div><div class="line"></div><div class="line">	@Autowired</div><div class="line">	private HRSaleService hrSaleService;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 向核心系统发送人员定时任务</div><div class="line">	 */</div><div class="line">	@Scheduled(fixedDelay = 5000)      //作为定时任务触发的源添加到方法上</div><div class="line">	/*fixedDelay = 5000;以一个固定周期延迟5秒执行,这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，5s后再次执行*/</div><div class="line">	public void saleToCenterTask() &#123;</div><div class="line">		log.info(&quot;agencyToCenterTask: ---&gt; &quot; + System.currentTimeMillis());</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 向核心系统发送代理机构数据定时任务</div><div class="line">	 */</div><div class="line">	@Scheduled(fixedRate  = 5000)</div><div class="line">	/*以一个固定周期延迟5秒执行,这个周期是以上一个调用任务的##开始时间##为基准，在上一个开始执行之后，5s后再次执行*/*/</div><div class="line">	public void agencyToCenterTask() &#123;</div><div class="line">        log.info(&quot;agencyToCenterTask: ---&gt; &quot; + System.currentTimeMillis());</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 向核心系统发送协议定时任务</div><div class="line">	 */</div><div class="line">	@Scheduled(cron = &quot;* */3 * * * *&quot;)</div><div class="line">	如果你需要在特定的时间执行，就需要用到cron 了</div><div class="line">	public void agreeToCenterTask() &#123;</div><div class="line">		log.info(&quot;agencyToCenterTask: ---&gt; &quot; + System.currentTimeMillis());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="在主类上使用-EnableScheduling注解开启对定时任务的支持，然后启动项目"><a href="#在主类上使用-EnableScheduling注解开启对定时任务的支持，然后启动项目" class="headerlink" title="在主类上使用@EnableScheduling注解开启对定时任务的支持，然后启动项目"></a>在主类上使用@EnableScheduling注解开启对定时任务的支持，然后启动项目</h3><p><strong>备注:</strong> 三个定时任务会执行,并且在同一线程中串行执行,如果只有一个定时任务不会有问题,如果有多个定时任务,如果一个定时任务卡死,则其他定时任务都不能执行</p>
@@ -484,7 +482,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -497,7 +495,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

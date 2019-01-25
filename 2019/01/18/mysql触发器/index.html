@@ -1,0 +1,761 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mysql," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MYSQL 触发器">
+<meta property="og:url" content="http://githubzys2017.githut.io/2019/01/18/mysql触发器/index.html">
+<meta property="og:site_name" content="成长之路">
+<meta property="og:updated_time" content="2019-01-18T15:25:40.882Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MYSQL 触发器">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://githubzys2017.githut.io/2019/01/18/mysql触发器/"/>
+
+
+
+
+
+  <title> MYSQL 触发器 | 成长之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">成长之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://githubzys2017.githut.io/2019/01/18/mysql触发器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张永帅">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="成长之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MYSQL 触发器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T22:07:00+08:00">
+                2019-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>触发器是与表有关的数据库对象,在满足条件时触发,并执行触发器中定义的语句集合.触发器的这种特性可以应用在数据库端,确保数据的完整性.</p>
+</blockquote>
+<h3 id="触发器的语法"><a href="#触发器的语法" class="headerlink" title="触发器的语法"></a>触发器的语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">CREATE TRIGGER trigger_name </div><div class="line">trigger_time trigger_event ON tb_name </div><div class="line">FOR EACH ROW trigger_stmt</div></pre></td></tr></table></figure>
+<p><code>trigger_name</code>：触发器的名称<br><code>tirgger_time</code>：触发时机，为BEFORE或者AFTER<br><code>trigger_event</code>：触发事件，为INSERT、DELETE或者UPDATE<br><code>tb_name</code>：表示建立触发器的表明，就是在哪张表上建立触发器<br><code>trigger_stmt</code>：触发器的程序体，可以是一条SQL语句或者是用BEGIN和END包含的多条语句;<br>所以可以说MySQL创建以下六种触发器：<br><code>BEFORE INSERT</code>,<code>BEFORE DELETE</code>,<code>BEFORE UPDATE</code><br><code>AFTER INSERT</code>,<code>AFTER DELETE</code>,<code>AFTER UPDATE</code></p>
+<blockquote>
+<p>触发器的名称指的是创建的触发器的名字<br>触发时机指的是事件之前或者之后<br>FOR EACH ROW 表示任何一条记录上的操作满足触发条件都会触发该触发器</p>
+</blockquote>
+<h4 id="创建有多个执行语句的触发器"><a href="#创建有多个执行语句的触发器" class="headerlink" title="创建有多个执行语句的触发器"></a>创建有多个执行语句的触发器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE TRIGGER 触发器名 BEFORE|AFTER 触发事件</div><div class="line">ON 表名 FOR EACH ROW </div><div class="line">BEGIN</div><div class="line">    执行语句列表</div><div class="line">END</div></pre></td></tr></table></figure>
+<p><strong>注意: BEGIN 和 END 之间的执行语句列表参数,表示需要执行的多个语句,不同的语句用<code>;</code>隔开</strong><br>tips:一般情况下,mysql中默认以<code>;</code>为结束语句,与触发器中所需要的分行起冲突.为解决此问题,可以使用<code>DELIMITER</code>,如:<code>DELIMITER||</code>可以将结束符号换成||,当触发器创建完成后使用<code>DELIMITER;</code>将结束符号换成<code>;</code>.</p>
+<blockquote>
+<p>例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">mysql&gt; DELIMITER ||</div><div class="line">mysql&gt; CREATE TRIGGER demo BEFORE DELETE</div><div class="line">    -&gt; ON users FOR EACH ROW</div><div class="line">    -&gt; BEGIN</div><div class="line">    -&gt; INSERT INTO logs VALUES(NOW());</div><div class="line">    -&gt; INSERT INTO logs VALUES(NOW());</div><div class="line">    -&gt; END</div><div class="line">    -&gt; ||</div><div class="line">Query OK, 0 rows affected (0.06 sec)</div><div class="line"></div><div class="line">mysql&gt; DELIMITER ;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="trigger-event"><a href="#trigger-event" class="headerlink" title="trigger_event"></a>trigger_event</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">触发器类型</th>
+<th style="text-align:center">激活触发器的语句</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">INSERT</td>
+<td style="text-align:center">INSERT, LOAD, DATA, REPLACE</td>
+</tr>
+<tr>
+<td style="text-align:center">UPDATE</td>
+<td style="text-align:center">UPDATE</td>
+</tr>
+<tr>
+<td style="text-align:center">DELETE</td>
+<td style="text-align:center">DELETE, REPLACE</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>load data语句是将文件的内容插入到表中，相当于是insert语句，而replace语句在一般的情况下和insert差不多，但是如果表中存在primary 或者unique索引的时候，如果插入的数据和原来的primary key或者unique相同的时候，会删除原来的数据，然后增加一条新的数据，所以有的时候执行一条replace语句相当于执行了一条delete和insert语句。</p>
+</blockquote>
+<h5 id="触发器可以执行一条语句-也可以执行多条语句的代码块"><a href="#触发器可以执行一条语句-也可以执行多条语句的代码块" class="headerlink" title="触发器可以执行一条语句,也可以执行多条语句的代码块"></a>触发器可以执行一条语句,也可以执行多条语句的代码块</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">DELIMITER $  #将语句的分隔符改为$</div><div class="line">BEGIN</div><div class="line">sql1;</div><div class="line">sql2;</div><div class="line">...</div><div class="line">sqln</div><div class="line">END $</div><div class="line">DELIMITER ;  #将语句的分隔符改回原来的分号&quot;;&quot;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在BEGIN…END语句中也可以定义变量，但是只能在BEGIN…END内部使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DECLARE var_name var_type [DEFAULT value] #定义变量，可指定默认值</div><div class="line">SET var_name = value  #给变量赋值</div></pre></td></tr></table></figure>
+<h5 id="NEW-和-OLD的使用"><a href="#NEW-和-OLD的使用" class="headerlink" title="NEW 和 OLD的使用"></a>NEW 和 OLD的使用</h5><p>|触发器的类型|NEW 和 OLD 的使用|<br>|INSERT| NEW 表示将要或者已经新增的数据|<br>|UPDATE| OLD 表示将要或者已经被删除的数据,NEW 表示将要或者已经修改的数据|<br>|DELETE| OLD表示将要或者已经被删除的数据|</p>
+<blockquote>
+<p>创建触发器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">DELIMITER $</div><div class="line">CREATE TRIGGER user_log AFTER INSERT ON users FOR EACH ROW</div><div class="line">BEGIN</div><div class="line">DECLARE s1 VARCHAR(40)character set utf8;</div><div class="line">DECLARE s2 VARCHAR(20) character set utf8;#后面发现中文字符编码出现乱码，这里设置字符集</div><div class="line">SET s2 = &quot; is created&quot;;</div><div class="line">SET s1 = CONCAT(NEW.name,s2);     #函数CONCAT可以将字符串连接</div><div class="line">INSERT INTO logs(log) values(s1);</div><div class="line">END $</div><div class="line">DELIMITER ;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="查看触发器"><a href="#查看触发器" class="headerlink" title="查看触发器"></a>查看触发器</h3><blockquote>
+<p>SHOW TRIGGERS  语句查看触发器信息</p>
+</blockquote>
+<h3 id="删除触发器"><a href="#删除触发器" class="headerlink" title="删除触发器"></a>删除触发器</h3><blockquote>
+<p>drop trigger  触发器名称;#删除触发器</p>
+</blockquote>
+<h3 id="触发器的限制和注意事项"><a href="#触发器的限制和注意事项" class="headerlink" title="触发器的限制和注意事项"></a>触发器的限制和注意事项</h3><ul>
+<li><p>1.触发程序不能调用将数据返回客户端的存储程序，也不能使用采用CALL语句的动态SQL语句，但是允许存储程序通过参数将数据返回触发程序，也就是存储过程或者函数通过OUT或者INOUT类型的参数将数据返回触发器是可以的，但是不能调用直接返回数据的过程。</p>
+</li>
+<li><p>2.不能再触发器中使用以显示或隐式方式开始或结束事务的语句，如START TRANS-ACTION,COMMIT或ROLLBACK。</p>
+</li>
+</ul>
+<p><em>注意事项：MySQL的触发器是按照BEFORE触发器、行操作、AFTER触发器的顺序执行的，其中任何一步发生错误都不会继续执行剩下的操作，如果对事务表进行的操作，如果出现错误，那么将会被回滚，如果是对非事务表进行操作，那么就无法回滚了，数据可能会出错。</em></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/18/mysql基本函数/" rel="next" title="MYSQL 函数">
+                <i class="fa fa-chevron-left"></i> MYSQL 函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/19/mysql存储过程/" rel="prev" title="mysql数据库存储过程">
+                mysql数据库存储过程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/1.jpg"
+               alt="张永帅" />
+          <p class="site-author-name" itemprop="name">张永帅</p>
+           
+              <p class="site-description motion-element" itemprop="description">业精于勤，荒于嬉！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#触发器的语法"><span class="nav-number">1.1.</span> <span class="nav-text">触发器的语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建有多个执行语句的触发器"><span class="nav-number">1.1.1.</span> <span class="nav-text">创建有多个执行语句的触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#trigger-event"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">trigger_event</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#触发器可以执行一条语句-也可以执行多条语句的代码块"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">触发器可以执行一条语句,也可以执行多条语句的代码块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NEW-和-OLD的使用"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">NEW 和 OLD的使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看触发器"><span class="nav-number">1.2.</span> <span class="nav-text">查看触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除触发器"><span class="nav-number">1.3.</span> <span class="nav-text">删除触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发器的限制和注意事项"><span class="nav-number">1.4.</span> <span class="nav-text">触发器的限制和注意事项</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张永帅</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
