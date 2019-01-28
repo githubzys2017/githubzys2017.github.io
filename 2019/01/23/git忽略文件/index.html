@@ -1,0 +1,732 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="git," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git 添加忽略文件">
+<meta property="og:url" content="http://githubzys2017.githut.io/2019/01/23/git忽略文件/index.html">
+<meta property="og:site_name" content="成长之路">
+<meta property="og:updated_time" content="2019-01-28T13:49:27.882Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git 添加忽略文件">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://githubzys2017.githut.io/2019/01/23/git忽略文件/"/>
+
+
+
+
+
+  <title> git 添加忽略文件 | 成长之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">成长之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://githubzys2017.githut.io/2019/01/23/git忽略文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张永帅">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="成长之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                git 添加忽略文件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T00:00:00+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<a id="more"></a>
+<h2 id="git-添加-gitignore文件"><a href="#git-添加-gitignore文件" class="headerlink" title="git 添加.gitignore文件"></a>git 添加<code>.gitignore</code>文件</h2><blockquote>
+<p>在项目根目录下创建 <code>.gitignore</code>文件，文件每一行保存一个匹配的忽略规则</p>
+</blockquote>
+<h3 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h3><blockquote>
+<p>温馨提示：<br>如果你不慎在创建.gitignore文件之前就push了项目，那么即使你在.gitignore文件中写入新的过滤规则，这些规则也不会起作用，Git仍然会对所有文件进行版本管理。简单来说出现这种问题的原因就是Git已经开始管理这些文件了，所以你无法再通过过滤规则过滤它们。所以大家一定要养成在项目开始就创建.gitignore文件的习惯，否则一单push，处理起来会非常麻烦。</p>
+</blockquote>
+<h3 id="git-忽略文件的原则"><a href="#git-忽略文件的原则" class="headerlink" title="git 忽略文件的原则"></a>git 忽略文件的原则</h3><ul>
+<li>忽略操作系统自动生成的文件，比如缩略图等；</li>
+<li>忽略编译生成的中间文件，可执行文件等；</li>
+<li>忽略你自己带有敏感信息的配置文件，比如存放口令的配置文件</li>
+</ul>
+<h3 id="gitignore文件忽略规则的匹配语法"><a href="#gitignore文件忽略规则的匹配语法" class="headerlink" title=".gitignore文件忽略规则的匹配语法"></a><code>.gitignore</code>文件忽略规则的匹配语法</h3><ol>
+<li><strong>空格</strong>不匹配任意文件，可作为分隔符，可用反斜杠转义；</li>
+<li>以<code>#</code>开头的行都会被git忽略。即#开头的文件标识注释，可以使用反斜杠进行转义。</li>
+<li>可以使用标准的glob模式匹配。所谓的glob模式是指shell所使用的简化了的正则表达式。</li>
+<li>以<code>/</code>开头表示目录；<code>/</code>结束的模式只匹配文件夹，以及在该文件夹路径下的内容，但不匹配该文件；”/“开始的模式匹配项目跟目录；如果一个模式不包含斜杠，则它匹配相对于当前 .gitignore 文件路径的内容，如果该模式不在 .gitignore 文件中，则相对于项目根目录。</li>
+<li>以星号<code>*</code>匹配多个字符，即匹配任意多个字符；使用两个星号<code>**</code>表示匹配任意中间目录，比如<code>a/**/z</code>可以匹配 a/z, a/b/z 或 a/b/c/z等。</li>
+<li>以问号<code>?</code>通配单个字符，即匹配一个任意字符；</li>
+<li>以方括号”[]”包含单个字符的匹配列表，即匹配任何一个列在方括号中的字符。比如[abc]表示要么匹配一个a，要么匹配一个b，要么匹配一个c；如果在方括号中使用短划线分隔两个字符，表示所有在这两个字符范围内的都可以匹配。比如[0-9]表示匹配所有0到9的数字，[a-z]表示匹配任意的小写字母）。</li>
+<li>以叹号”!”表示不忽略(跟踪)匹配到的文件或目录，即要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。需要特别注意的是：如果文件的父目录已经被前面的规则排除掉了，那么对这个文件用”!”规则是不起作用的。也就是说”!”开头的模式表示否定，该文件将会再次被包含，如果排除了该文件的父级目录，则使用”!”也不会再次被包含。可以使用反斜杠进行转义。</li>
+</ol>
+<h3 id="git-忽略文件的优先级"><a href="#git-忽略文件的优先级" class="headerlink" title="git 忽略文件的优先级"></a>git 忽略文件的优先级</h3><blockquote>
+<p>在<code>.gitignore</code>中，每一行指定一个操作规则，git检查忽略规则的时候有多个来源，它的优先级如下（从高到低）；</p>
+</blockquote>
+<ol>
+<li>从命令行中读取可用的忽略规则</li>
+<li>当前目录定义的规则</li>
+<li>父级目录定义的规则，依次递推</li>
+<li>$GIT_DIR/info/exclude 文件中定义的规则</li>
+<li>core.excludesfile中定义的全局规则</li>
+</ol>
+<h3 id="gitignor忽略规则查看"><a href="#gitignor忽略规则查看" class="headerlink" title=".gitignor忽略规则查看"></a>.gitignor忽略规则查看</h3><p>如果你发下.gitignore写得有问题，需要找出来到底哪个规则写错了，可以用git check-ignore命令检查：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git check-ignore -v HelloWorld.class</div><div class="line">.gitignore:1:*.class    HelloWorld.class</div></pre></td></tr></table></figure></p>
+<h2 id="Git忽略规则-gitignore配置）不生效原因和解决"><a href="#Git忽略规则-gitignore配置）不生效原因和解决" class="headerlink" title="Git忽略规则(.gitignore配置）不生效原因和解决"></a>Git忽略规则(.gitignore配置）不生效原因和解决</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">第一种方法:</div><div class="line">.gitignore中已经标明忽略的文件目录下的文件，git push的时候还会出现在push的目录中，或者用git status查看状态，想要忽略的文件还是显示被追踪状态。</div><div class="line">原因是因为在git忽略目录中，新建的文件在git中会有缓存，如果某些文件已经被纳入了版本管理中，就算是在.gitignore中已经声明了忽略路径也是不起作用的，</div><div class="line">这时候我们就应该先把本地缓存删除，然后再进行git的提交，这样就不会出现忽略的文件了。</div><div class="line">  </div><div class="line">解决方法: git清除本地缓存（改变成未track状态），然后再提交:</div><div class="line">[root@kevin ~]# git rm -r --cached .</div><div class="line">[root@kevin ~]# git add .</div><div class="line">[root@kevin ~]# git commit -m &apos;update .gitignore&apos;</div><div class="line">[root@kevin ~]# git push -u origin master</div><div class="line"> </div><div class="line">需要特别注意的是：</div><div class="line">1）.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。</div><div class="line">2）想要.gitignore起作用，必须要在这些文件不在暂存区中才可以，.gitignore文件只是忽略没有被staged(cached)文件，</div><div class="line">   对于已经被staged文件，加入ignore文件时一定要先从staged移除，才可以忽略。</div><div class="line"> </div><div class="line">第二种方法:（推荐）</div><div class="line">在每个clone下来的仓库中手动设置不要检查特定文件的更改情况。</div><div class="line">[root@kevin ~]# git update-index --assume-unchanged PATH                  //在PATH处输入要忽略的文件</div></pre></td></tr></table></figure>
+<h2 id="git-删除远程仓库的文件和目录"><a href="#git-删除远程仓库的文件和目录" class="headerlink" title="git 删除远程仓库的文件和目录"></a>git 删除远程仓库的文件和目录</h2><h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 删除a目录下的123.text文件</div><div class="line">git rm -r --cached a/123.text</div><div class="line"># 提交</div><div class="line">git commit -m &quot;删除123文件&quot;</div><div class="line">#</div><div class="line">git push</div></pre></td></tr></table></figure>
+<h3 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 删除a目录</div><div class="line">git rm -r --cached a</div><div class="line"># 提交</div><div class="line">git commit -m &quot;删除a文件夹&quot;</div><div class="line">#</div><div class="line">git push</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/19/mysql存储过程/" rel="next" title="mysql数据库存储过程">
+                <i class="fa fa-chevron-left"></i> mysql数据库存储过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/1.jpg"
+               alt="张永帅" />
+          <p class="site-author-name" itemprop="name">张永帅</p>
+           
+              <p class="site-description motion-element" itemprop="description">业精于勤，荒于嬉！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-添加-gitignore文件"><span class="nav-number">1.</span> <span class="nav-text">git 添加.gitignore文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#温馨提示"><span class="nav-number">1.1.</span> <span class="nav-text">温馨提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-忽略文件的原则"><span class="nav-number">1.2.</span> <span class="nav-text">git 忽略文件的原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitignore文件忽略规则的匹配语法"><span class="nav-number">1.3.</span> <span class="nav-text">.gitignore文件忽略规则的匹配语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-忽略文件的优先级"><span class="nav-number">1.4.</span> <span class="nav-text">git 忽略文件的优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitignor忽略规则查看"><span class="nav-number">1.5.</span> <span class="nav-text">.gitignor忽略规则查看</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git忽略规则-gitignore配置）不生效原因和解决"><span class="nav-number">2.</span> <span class="nav-text">Git忽略规则(.gitignore配置）不生效原因和解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-删除远程仓库的文件和目录"><span class="nav-number">3.</span> <span class="nav-text">git 删除远程仓库的文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件"><span class="nav-number">3.1.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件夹"><span class="nav-number">3.2.</span> <span class="nav-text">删除文件夹</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张永帅</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
